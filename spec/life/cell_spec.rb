@@ -28,4 +28,17 @@ describe Cell do
       it { should be_live }
     end
   end
+
+  describe "#kill" do
+    subject { cell }
+    before { subject.kill }
+    context "when live" do
+      let(:cell) { Cell.new(true) }
+      it { should_not be_live }
+    end
+    context "when dead" do
+      let(:cell) { Cell.new(false) }
+      it { should_not be_live }
+    end
+  end
 end

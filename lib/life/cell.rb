@@ -11,4 +11,8 @@ class Cell
   def live
     @live = true
   end
+
+  def kill
+    @live = false
+  end
 end
