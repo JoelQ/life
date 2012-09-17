@@ -1,18 +1,8 @@
 # Life
 
-TODO: Write a gem description
+A ruby implementation of Conway's [game of life](http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life).
 
 ## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'life'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
 
     $ gem install life
 
