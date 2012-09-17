@@ -4,7 +4,7 @@ class World
 
   def initialize(x, y, seed = [])
     @current = Array.new(x, Array.new(y, Cell.new(false)))
-    @next = Array.new(x, Array.new(y, Cell.new(false)))
+    @next = @current.dup
     seed(seed)
   end
 
@@ -16,7 +16,22 @@ class World
     end
   end
 
-  def tick
-
+  def live_neighbor_count_for(x,y)
+    0
   end
+
+  def tick
+    current.each do |row|
+      x = current.index(row)
+      row.each do |cell|
+        y = row.index(cell)
+        if cell.live?
+          case live_neighbor_count_for(x,y)
+          when 0..2 then cell.kill
+          end
+        end
+      end
+    end
+  end
+
 end
