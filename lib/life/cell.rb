@@ -8,6 +8,10 @@ class Cell
     @live
   end
 
+  def dead?
+    !@live
+  end
+
   def live
     @live = true
   end

@@ -4,6 +4,7 @@ class World
 
   def initialize(x, y, seed = [])
     @current = Array.new(x, Array.new(y, Cell.new(false)))
+    @next = Array.new(x, Array.new(y, Cell.new(false)))
     seed(seed)
   end
 
@@ -13,5 +14,9 @@ class World
       y = cell_coords[1]
       current[x][y].live
     end
+  end
+
+  def tick
+
   end
 end
