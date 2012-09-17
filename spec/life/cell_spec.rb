@@ -2,17 +2,14 @@ require 'spec_helper'
 
 describe Cell do
   describe "#live?" do
+    subject { cell }
     context "when live" do
       let(:cell) { Cell.new(true) }
-      it "should be true" do
-        cell.live?.should be_true
-      end
+      it { should be_live }
     end
     context "when dead" do
       let(:cell) { Cell.new(false) }
-      it "should be false" do
-        cell.live?.should be_false
-      end
+      it { should_not be_live }
     end
   end
 
