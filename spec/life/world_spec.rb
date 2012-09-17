@@ -27,7 +27,7 @@ describe World do
     describe "Any live cell with fewer than two live neighbours dies, as if caused by under-population" do
       context "when no neighbours" do
         let(:world) { World.new(3,3, [[1,1]]) }
-        it "NW cell should be dead " do
+        it "should be dead " do
           world.tick
           world.current[1][1].should be_dead
         end
