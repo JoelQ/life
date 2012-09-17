@@ -12,6 +12,9 @@ describe World do
     it "should be populated with dead cells" do
       world.current[0][1].live?.should be_false
     end
+    it "should be populated by separate cells" do
+      world.current[0][1].should_not eq world.current[1][1]
+    end
   end
 
   describe "seed pattern" do
@@ -24,9 +27,17 @@ describe World do
   end
 
   describe "#live_neighbor_count_for" do
+    context "when no neighbours" do
     let(:world) { World.new(3,3, [[1,1]])}
-    it "should return the right amount" do
-      world.live_neighbor_count_for(1,1).should eq 0
+      it "should return the right amount" do
+        world.live_neighbor_count_for(1,1).should eq 0
+      end
+    end
+    context "when 3 neighbours" do
+      let(:world) { World.new(3,3, [[1,1], [0,0], [0,1], [0,2]])}
+      it "should return the right amount" do
+        world.live_neighbor_count_for(1,1).should eq 3
+      end
     end
   end
 

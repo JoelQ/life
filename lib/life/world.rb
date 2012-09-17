@@ -3,7 +3,7 @@ class World
   attr_reader :current
 
   def initialize(x, y, seed = [])
-    @current = Array.new(x, Array.new(y, Cell.new(false)))
+    @current = Array.new(x) { |ix| Array.new(y) {|iy| Cell.new(false)}}
     @next = @current.dup
     seed(seed)
   end
