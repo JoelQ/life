@@ -10,7 +10,7 @@ describe World do
       world.current.first.length.should eq 8
     end
     it "should be populated with dead cells" do
-      world.current[0][0].live?.should be_false
+      world.current[0][1].live?.should be_false
     end
   end
 end

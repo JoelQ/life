@@ -7,4 +7,8 @@ class Cell
   def live?
     @live
   end
+
+  def live
+    @live = true
+  end
 end

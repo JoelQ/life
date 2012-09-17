@@ -15,4 +15,17 @@ describe Cell do
       end
     end
   end
+
+  describe "#live" do
+    subject { cell }
+    before { subject.live }
+    context "when live" do
+      let(:cell) { Cell.new(true) }
+      it { should be_live }
+    end
+    context "when dead" do
+      let(:cell) { Cell.new(false) }
+      it { should be_live }
+    end
+  end
 end
