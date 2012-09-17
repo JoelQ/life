@@ -17,7 +17,13 @@ class World
   end
 
   def live_neighbor_count_for(x,y)
-    0
+    count = 0
+    (x-1..x+1).each do |curr_x|
+      (y-1..y+1).each do |curr_y|
+        count += 1 if current[curr_x][curr_y].live? unless curr_x == x && curr_y == y
+      end
+    end
+    count
   end
 
   def tick
