@@ -5,6 +5,10 @@ class Grid < Array
     seed(seed)
   end
 
+  def deep_copy
+    Marshal.load(Marshal.dump(self))
+  end
+
 private
   def seed(pattern)
     pattern.each do |coords|

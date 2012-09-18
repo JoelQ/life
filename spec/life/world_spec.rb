@@ -8,13 +8,6 @@ describe World do
     end
   end
 
-  describe "#duplicate_grid" do
-    let(:world) { World.new(3,4) }
-    it "should create a distinct copy" do
-      world.duplicate_grid(world.current).should_not eq world.current
-    end
-  end
-
   describe "seed pattern" do
     let(:world) { World.new(4,5, [[0,0], [1,2], [3,1]])}
     it "should be initialized correctly" do

@@ -15,6 +15,13 @@ describe Grid do
     end
   end
 
+  describe "#deep_copy" do
+    let(:grid) { Grid.new(3,4) }
+    it "should create a distinct copy" do
+     grid.deep_copy.should_not eq grid
+    end
+  end
+
   describe "seed pattern" do
     let(:grid) { Grid.new(4,5, [[0,0], [1,2], [3,1]])}
     it "should be initialized correctly" do

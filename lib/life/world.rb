@@ -3,19 +3,10 @@ class World
   attr_reader :current
 
   def initialize(x, y, seed = [])
-    @current = Array.new(x) { |ix| Array.new(y) {|iy| Cell.new(false)}}
-    @next = duplicate_grid(@current)
+    @current = Grid.new(x, y, seed)
+    @next = @current.deep_copy
     @width = x
     @height = y
-    seed(seed)
-  end
-
-  def seed(seed)
-    seed.each do |cell_coords|
-      x = cell_coords[0]
-      y = cell_coords[1]
-      current[x][y].live
-    end
   end
 
   def live_neighbor_count_for(x,y)
@@ -48,10 +39,6 @@ class World
         end
       end
     end
-    @current = duplicate_grid(@next)
-  end
-
-  def duplicate_grid(grid)
-    Marshal.load(Marshal.dump(grid))
+    @current = @next.deep_copy
   end
 end
