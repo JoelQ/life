@@ -4,7 +4,7 @@ class World
 
   def initialize(x, y, seed = [])
     @current = Array.new(x) { |ix| Array.new(y) {|iy| Cell.new(false)}}
-    @next = @current.dup
+    @next = duplicate_grid(@current)
     @width = x
     @height = y
     seed(seed)
@@ -39,11 +39,17 @@ class World
         y = row.index(cell)
         if cell.live?
           case live_neighbor_count_for(x,y)
-          when 0..1 then cell.kill
-          when 2..3 then cell.live
+          when 0..1 then @next[x][y].kill
+          when 2..3 then @next[x][y].live
+          when 4..8 then @next[x][y].kill
           end
         end
       end
     end
+    @current = @next.dup
+  end
+
+  def duplicate_grid(grid)
+    Marshal.load(Marshal.dump(grid))
   end
 end

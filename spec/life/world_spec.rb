@@ -17,6 +17,13 @@ describe World do
     end
   end
 
+  describe "#duplicate_grid" do
+    let(:world) { World.new(3,4) }
+    it "should create a distinct copy" do
+      world.duplicate_grid(world.current).should_not eq world.current
+    end
+  end
+
   describe "seed pattern" do
     let(:world) { World.new(4,5, [[0,0], [1,2], [3,1]])}
     it "should be initialized correctly" do
@@ -75,6 +82,48 @@ describe World do
         it "should be alive " do
           world.tick
           world.current[1][1].should be_live
+        end
+      end
+    end
+
+    describe "Any live cell with more than three live neighbours dies, as if by overcrowding." do
+      context "when 4 neighbours" do
+        let(:world) { World.new(3,3, [[1,1], [0,0], [0,1], [0,2], [1,0]]) }
+        it "should be dead " do
+          world.tick
+          world.current[1][1].should be_dead
+        end
+      end
+
+      context "when 5 neighbours" do
+        let(:world) { World.new(3,3, [[1,1], [0,0], [0,1], [0,2], [1,0], [1,2]]) }
+        it "should be dead " do
+          world.tick
+          world.current[1][1].should be_dead
+        end
+      end
+
+      context "when 6 neighbours" do
+        let(:world) { World.new(3,3, [[1,1], [0,0], [0,1], [0,2], [1,0], [1,2], [2,0]]) }
+        it "should be dead " do
+          world.tick
+          world.current[1][1].should be_dead
+        end
+      end
+
+      context "when 7 neighbours" do
+        let(:world) { World.new(3,3, [[1,1], [0,0], [0,1], [0,2], [1,0], [1,2], [2,0], [2,1]]) }
+        it "should be dead " do
+          world.tick
+          world.current[1][1].should be_dead
+        end
+      end
+
+      context "when 8 neighbours" do
+        let(:world) { World.new(3,3, [[1,1], [0,0], [0,1], [0,2], [1,0], [1,2], [2,0], [2,1], [2,2]]) }
+        it "should be dead " do
+          world.tick
+          world.current[1][1].should be_dead
         end
       end
     end
