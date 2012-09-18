@@ -128,5 +128,13 @@ describe World do
       end
     end
 
+    describe "Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction." do
+      let(:world) { World.new(3,3, [[0,0], [0,1], [0,2]]) }
+      it "should be live " do
+        world.tick
+        world.current[1][1].should be_live
+      end
+    end
+
   end
 end

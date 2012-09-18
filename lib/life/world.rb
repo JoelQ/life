@@ -43,6 +43,8 @@ class World
           when 2..3 then @next[x][y].live
           when 4..8 then @next[x][y].kill
           end
+        elsif cell.dead? && live_neighbor_count_for(x,y) == 3
+          @next[x][y].live
         end
       end
     end
