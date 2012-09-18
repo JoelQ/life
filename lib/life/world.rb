@@ -48,7 +48,7 @@ class World
         end
       end
     end
-    @current = @next.dup
+    @current = duplicate_grid(@next)
   end
 
   def duplicate_grid(grid)
