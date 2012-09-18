@@ -11,9 +11,7 @@ class Grid < Array
 
 private
   def seed(pattern)
-    pattern.each do |coords|
-      x = coords[0]
-      y = coords[1]
+    pattern.each do |x, y|
       self[x][y].live
     end
   end
