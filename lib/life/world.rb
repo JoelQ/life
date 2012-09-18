@@ -5,22 +5,6 @@ class World
   def initialize(x, y, seed = [])
     @current = Grid.new(x, y, seed)
     @next = @current.deep_copy
-    @width = x
-    @height = y
-  end
-
-  def live_neighbor_count_for(x,y)
-    count = 0
-    west = x - 1 < 0 ? 0 : x - 1
-    east = x + 1 > @width - 1 ? @width - 1 : x + 1
-    north = y - 1 < 0 ? 0 : y - 1
-    south = y + 1 > @height - 1 ? @height - 1 : y + 1
-    (west..east).each do |curr_x|
-      (north..south).each do |curr_y|
-        count += 1 if current[curr_x][curr_y].live? unless curr_x == x && curr_y == y
-      end
-    end
-    count
   end
 
   def tick
@@ -29,12 +13,12 @@ class World
       row.each do |cell|
         y = row.index(cell)
         if cell.live?
-          case live_neighbor_count_for(x,y)
+          case @current.live_neighbor_count_for(x,y)
           when 0..1 then @next[x][y].kill
           when 2..3 then @next[x][y].live
           when 4..8 then @next[x][y].kill
           end
-        elsif cell.dead? && live_neighbor_count_for(x,y) == 3
+        elsif cell.dead? && @current.live_neighbor_count_for(x,y) == 3
           @next[x][y].live
         end
       end

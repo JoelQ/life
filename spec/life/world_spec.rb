@@ -17,21 +17,6 @@ describe World do
     end
   end
 
-  describe "#live_neighbor_count_for" do
-    context "when no neighbours" do
-    let(:world) { World.new(3,3, [[1,1]])}
-      it "should return the right amount" do
-        world.live_neighbor_count_for(1,1).should eq 0
-      end
-    end
-    context "when 3 neighbours" do
-      let(:world) { World.new(3,3, [[1,1], [0,0], [0,1], [0,2]])}
-      it "should return the right amount" do
-        world.live_neighbor_count_for(1,1).should eq 3
-      end
-    end
-  end
-
   describe "Rules" do
     describe "Any live cell with fewer than two live neighbours dies, as if caused by under-population" do
       context "when 0 neighbours" do

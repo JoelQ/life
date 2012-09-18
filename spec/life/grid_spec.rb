@@ -30,4 +30,23 @@ describe Grid do
       grid[3][1].should be_live
     end
   end
+
+  describe "#live_neighbor_count_for" do
+    let(:grid) { Grid.new(3,3, [[1,0], [0,1], [2,1], [1,2]])}
+    context "when NW corner" do
+      it "should return the right amount" do
+        grid.live_neighbor_count_for(0,0).should eq 2
+      end
+    end
+    context "when SE corner" do
+      it "should return the right amount" do
+        grid.live_neighbor_count_for(2,2).should eq 2
+      end
+    end
+    context "when center" do
+      it "should return the right amount" do
+        grid.live_neighbor_count_for(1,1).should eq 4
+      end
+    end
+  end
 end
