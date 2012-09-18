@@ -12,6 +12,7 @@ module Life
       method_option :width, :type => :numeric, :aliases => '-w', :desc => "Width of board", :required => true
       method_option :height, :type => :numeric,:aliases => '-h', :desc => "Height of board", :required => true
       method_option :generations, :type => :numeric,:aliases => '-g', :desc => "How many generations to display", :required => true
+
       def new
         seed = []
         while yes? "Would you like to add a live cell to the grid? [Y/n]"
