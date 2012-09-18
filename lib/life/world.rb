@@ -5,6 +5,8 @@ class World
   def initialize(x, y, seed = [])
     @current = Array.new(x) { |ix| Array.new(y) {|iy| Cell.new(false)}}
     @next = @current.dup
+    @width = x
+    @height = y
     seed(seed)
   end
 
@@ -18,8 +20,12 @@ class World
 
   def live_neighbor_count_for(x,y)
     count = 0
-    (x-1..x+1).each do |curr_x|
-      (y-1..y+1).each do |curr_y|
+    west = x - 1 < 0 ? 0 : x - 1
+    east = x + 1 > @width - 1 ? @width - 1 : x + 1
+    north = y - 1 < 0 ? 0 : y - 1
+    south = y + 1 > @height - 1 ? @height - 1 : y + 1
+    (west..east).each do |curr_x|
+      (north..south).each do |curr_y|
         count += 1 if current[curr_x][curr_y].live? unless curr_x == x && curr_y == y
       end
     end
@@ -33,11 +39,11 @@ class World
         y = row.index(cell)
         if cell.live?
           case live_neighbor_count_for(x,y)
-          when 0..2 then cell.kill
+          when 0..1 then cell.kill
+          when 2..3 then cell.live
           end
         end
       end
     end
   end
-
 end
