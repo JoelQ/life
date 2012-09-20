@@ -23,6 +23,13 @@ class Grid < Array
     count
   end
 
+  def to_s(live, dead)
+    rows = map do |row|
+      row.map { |cell| cell.live? ? live : dead }.join(" ")
+    end
+    rows.join("\n")
+  end
+
 private
   def x_range(x)
     west = x - 1 < 0 ? 0 : x - 1

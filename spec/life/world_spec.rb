@@ -17,6 +17,13 @@ describe World do
     end
   end
 
+  describe "to_s" do
+    let(:world) { World.new(3,3, [[0,0], [1,2], [2,1]])}
+    it "should output the correct string" do
+      world.to_s("@", "_").should eq "@ _ _\n_ _ @\n_ @ _"
+    end
+  end
+
   describe "Rules" do
     before { world.tick }
     subject { world.current[1][1] }
