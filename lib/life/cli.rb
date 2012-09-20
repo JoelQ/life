@@ -18,7 +18,7 @@ module Life
         seed = build_seed(options[:seed])
         max_gen = options[:generations]
         world = World.new(options[:height], options[:width], seed)
-        display_simulation max_gen, options[:height], world
+        display_simulation max_gen, options[:width], options[:height], world
       end
 
       desc :random, "Create new game with random starting pattern"
@@ -30,12 +30,12 @@ module Life
         seed = build_random_seed options[:width], options[:height]
         max_gen = options[:generations]
         world = World.new(options[:height], options[:width], seed)
-        display_simulation max_gen, options[:height], world
+        display_simulation max_gen, options[:width], options[:height], world
       end
 
       no_tasks do
         def eol(height, curr_gen, max_gen)
-          curr_gen == max_gen ? "\n" : format("\e[1A" * (height-1) + "\r")
+          curr_gen == max_gen ? "\n" : format("\e[1A" * (height+3) + "\r")
         end
 
         def build_seed(pattern)
@@ -51,9 +51,10 @@ module Life
           seed
         end
 
-        def display_simulation(max_gen, height, world)
+        def display_simulation(max_gen, width, height, world)
           (1..max_gen).each do |gen|
-            print world.to_s("@", " ") + eol(height, gen, max_gen)
+            world_data = "==============\nGeneration:#{gen}/#{max_gen}\nWidth:#{width}\nHeight: #{height}\n"
+            print world_data + world.to_s("@", " ") + eol(height, gen, max_gen)
             sleep(0.1)
             world.tick
           end
