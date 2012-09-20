@@ -14,6 +14,7 @@ module Life
       method_option :generations, :type => :numeric,:aliases => '-g', :desc => "How many generations to display", :required => true
 
       def new
+        @height = options[:height]
         seed = []
         while yes? "Would you like to add a live cell to the grid? [Y/n]"
           x = ask "Please enter x coordinate"
@@ -24,20 +25,18 @@ module Life
         world = World.new options[:width], options[:height], seed
 
         (1..options[:generations]).each do |gen|
-          puts "== Generation #{gen} =="
           draw(world)
-          puts ""
+          sleep(1)
           world.tick
         end
       end
 
       def draw(world)
-        world.current.each do |row|
-          processed_row = row.map { |cell| cell.live? ? "@" : "_"}
-          print "["
-          print processed_row.join(' ')
-          puts "]"
-        end
+        world_string = world.current.map do |row|
+          processed_row = row.map { |cell| cell.live? ? "@" : "_"}.join(' ')
+        end.join("\n")
+        eol = format("\e[1A" * @height + "\r")
+        print world_string + eol
       end
 
     end
