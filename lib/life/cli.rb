@@ -12,10 +12,12 @@ module Life
       method_option :width, :type => :numeric, :aliases => '-w', :desc => "Width of board", :required => true
       method_option :height, :type => :numeric,:aliases => '-h', :desc => "Height of board", :required => true
       method_option :generations, :type => :numeric,:aliases => '-g', :desc => "How many generations to display", :required => true
+      method_option :seed, :type => :array, :aliases => '-s', :desc => "Initial Pattern"
 
       def new
+        seed = build_seed(options[:seed])
         max_gen = options[:generations]
-        world = build_world(options[:width], options[:height])
+        world = build_world(options[:width], options[:height], seed)
 
         (1..max_gen).each do |gen|
           print world.to_s("@", "_") + eol(options[:height], gen, max_gen)
@@ -26,17 +28,20 @@ module Life
 
       no_tasks do
         def eol(height, curr_gen, max_gen)
-          curr_gen == max_gen ? "\n" : format("\e[1A" * height + "\r")
+          curr_gen == max_gen ? "\n" : format("\e[1A" * (height-1) + "\r")
         end
 
-        def build_world(width, height)
-          seed = []
+        def build_seed(pattern)
+          pattern.map {|pair| pair.split(":").map { |coord| coord.to_i - 1 } }
+        end
+
+        def build_world(width, height, seed=[])
           while yes? "Would you like to add a live cell to the grid? [Y/n]"
             x = get_x(width)
             y = get_y(height)
             seed << [(x.to_i) - 1, (y.to_i) -1]
           end
-          World.new width, height, seed
+          World.new height, width, seed
         end
 
         def get_x(width)
