@@ -24,7 +24,7 @@ module Life
       desc :random, "Create new game with random starting pattern"
       method_option :width, :type => :numeric, :aliases => '-w', :desc => "Width of board", default: 30
       method_option :height, :type => :numeric,:aliases => '-h', :desc => "Height of board", default: 30
-      method_option :generations, :type => :numeric,:aliases => '-g', :desc => "How many generations to display", default: 30
+      method_option :generations, :type => :numeric,:aliases => '-g', :desc => "How many generations to display", default: 100
 
       def random
         seed = build_random_seed options[:width], options[:height]
@@ -54,7 +54,7 @@ module Life
         def display_simulation(max_gen, height, world)
           (1..max_gen).each do |gen|
             print world.to_s("@", " ") + eol(height, gen, max_gen)
-            sleep(0.2)
+            sleep(0.1)
             world.tick
           end
         end
