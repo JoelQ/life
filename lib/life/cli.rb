@@ -17,13 +17,8 @@ module Life
       def new
         seed = build_seed(options[:seed])
         max_gen = options[:generations]
-        world = World.new(options[:height], options[:width] seed)
-
-        (1..max_gen).each do |gen|
-          print world.to_s("@", "_") + eol(options[:height], gen, max_gen)
-          sleep(1)
-          world.tick
-        end
+        world = World.new(options[:height], options[:width], seed)
+        display_simulation max_gen, options[:height], world
       end
 
       no_tasks do
@@ -33,6 +28,14 @@ module Life
 
         def build_seed(pattern)
           pattern.map {|pair| pair.split(":").map { |coord| coord.to_i - 1 } }
+        end
+
+        def display_simulation(max_gen, height, world)
+          (1..max_gen).each do |gen|
+            print world.to_s("@", "_") + eol(height, gen, max_gen)
+            sleep(1)
+            world.tick
+          end
         end
       end
 
