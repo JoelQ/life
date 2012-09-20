@@ -12,17 +12,17 @@ To use Life, run the `life new` command. It can be used with the following optio
 * `--width` or `-w` specifies how many cells wide the game will be
 * `--height` or `-h` specifies how many cells high the game will be
 * `--generations` or `-g` specifies how many generations the simulation will run
+* '--seed' or '-s' is the initial pattern of the game. Pass coordinate pairs using the following pattern: `x:y x:y x:y ...`
 
 ```
 $ life new -w 3 -h 4 -g 5
 ```
 This will create a 3x4 game that runs for 5 generations
 
-When first creating a game, you will be prompted to enter which cells are initially alive.
+When first creating a game, you will be prompted to add cells some live cells.
 
 ## TODO
-* Ability to pass initial configuration as command-line option
-* Animate instead of displaying all the generations
+* Add some default configurations to start the fun
 
 ## Contributing
 
