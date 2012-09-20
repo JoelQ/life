@@ -22,9 +22,9 @@ module Life
       end
 
       desc :random, "Create new game with random starting pattern"
-      method_option :width, :type => :numeric, :aliases => '-w', :desc => "Width of board", :required => true
-      method_option :height, :type => :numeric,:aliases => '-h', :desc => "Height of board", :required => true
-      method_option :generations, :type => :numeric,:aliases => '-g', :desc => "How many generations to display", :required => true
+      method_option :width, :type => :numeric, :aliases => '-w', :desc => "Width of board", default: 30
+      method_option :height, :type => :numeric,:aliases => '-h', :desc => "Height of board", default: 30
+      method_option :generations, :type => :numeric,:aliases => '-g', :desc => "How many generations to display", default: 30
 
       def random
         seed = build_random_seed options[:width], options[:height]
