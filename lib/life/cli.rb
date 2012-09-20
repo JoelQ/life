@@ -14,25 +14,18 @@ module Life
       method_option :generations, :type => :numeric,:aliases => '-g', :desc => "How many generations to display", :required => true
 
       def new
-        @max_gen = options[:generations]
+        max_gen = options[:generations]
         world = build_world(options[:width], options[:height])
 
-        (1..options[:generations]).each do |gen|
-          draw(world, options[:height], gen)
+        (1..max_gen).each do |gen|
+          print world.to_s("@", "_") + eol(options[:height], gen, max_gen)
           sleep(1)
           world.tick
         end
       end
 
-      def draw(world, height, gen)
-        world_string = world.current.map do |row|
-          processed_row = row.map { |cell| cell.live? ? "@" : "_"}.join(' ')
-        end.join("\n")
-        print world_string + eol(height, gen)
-      end
-
-      def eol(height, gen)
-        gen == @max_gen ? "\n" : format("\e[1A" * height + "\r")
+      def eol(height, curr_gen, max_gen)
+        curr_gen == max_gen ? "\n" : format("\e[1A" * height + "\r")
       end
 
       def build_world(width, height)
