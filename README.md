@@ -15,11 +15,9 @@ To use Life, run the `life new` command. It can be used with the following optio
 * '--seed' or '-s' is the initial pattern of the game. Pass coordinate pairs using the following pattern: `x:y x:y x:y ...`
 
 ```
-$ life new -w 3 -h 4 -g 5
+$ life new -w 3 -h 4 -g 5 -s 3:2 1:1
 ```
-This will create a 3x4 game that runs for 5 generations
-
-When first creating a game, you will be prompted to add cells some live cells.
+This will create a 3x4 game that runs for 5 generations. The live cells in the starting pattern are `3,2` and `1,1`
 
 ## TODO
 * Add some default configurations to start the fun

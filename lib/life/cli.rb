@@ -17,7 +17,7 @@ module Life
       def new
         seed = build_seed(options[:seed])
         max_gen = options[:generations]
-        world = build_world(options[:width], options[:height], seed)
+        world = World.new(options[:height], options[:width] seed)
 
         (1..max_gen).each do |gen|
           print world.to_s("@", "_") + eol(options[:height], gen, max_gen)
@@ -34,34 +34,6 @@ module Life
         def build_seed(pattern)
           pattern.map {|pair| pair.split(":").map { |coord| coord.to_i - 1 } }
         end
-
-        def build_world(width, height, seed=[])
-          while yes? "Would you like to add a live cell to the grid? [Y/n]"
-            x = get_x(width)
-            y = get_y(height)
-            seed << [(x.to_i) - 1, (y.to_i) -1]
-          end
-          World.new height, width, seed
-        end
-
-        def get_x(width)
-          x = ask("Please enter x coordinate").to_i
-          while x > width
-            puts "This number is too big"
-            x = ask("Please enter x coordinate").to_i
-          end
-          return x
-        end
-
-        def get_y(height)
-          y = ask("Please enter y coordinate").to_i
-          while y > height
-            puts "This number is too big"
-            y = ask("Please enter y coordinate").to_i
-          end
-          return y
-        end
-
       end
 
     end
