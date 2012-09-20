@@ -25,4 +25,8 @@ class World
     end
     @current = @next.deep_copy
   end
+
+  def to_s(live, dead)
+    @current.to_s(live, dead)
+  end
 end
