@@ -54,7 +54,7 @@ module Life
         def display_simulation(max_gen, height, world)
           (1..max_gen).each do |gen|
             print world.to_s("@", " ") + eol(height, gen, max_gen)
-            sleep(1)
+            sleep(0.5)
             world.tick
           end
         end
