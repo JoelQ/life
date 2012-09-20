@@ -19,8 +19,13 @@ $ life new -w 3 -h 4 -g 5 -s 3:2 1:1
 ```
 This will create a 3x4 game that runs for 5 generations. The live cells in the starting pattern are `3,2` and `1,1`
 
-## TODO
-* Add some default configurations to start the fun
+## Pre-built configurations
+### Random
+You can use a random initial pattern if you don't feel like building one yourself. Options are the same as for the new method except that no seed is passed.
+
+```
+$ life random -w 10 -h 10 -g 5
+```
 
 ## Contributing
 
