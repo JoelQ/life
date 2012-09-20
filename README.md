@@ -26,6 +26,10 @@ You can use a random initial pattern if you don't feel like building one yoursel
 ```
 $ life random -w 10 -h 10 -g 5
 ```
+or
+```
+$ life random
+```
 
 ## Contributing
 
