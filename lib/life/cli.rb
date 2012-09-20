@@ -14,29 +14,35 @@ module Life
       method_option :generations, :type => :numeric,:aliases => '-g', :desc => "How many generations to display", :required => true
 
       def new
-        @height = options[:height]
+        @max_gen = options[:generations]
+        world = build_world(options[:width], options[:height])
+
+        (1..options[:generations]).each do |gen|
+          draw(world, options[:height], gen)
+          sleep(1)
+          world.tick
+        end
+      end
+
+      def draw(world, height, gen)
+        world_string = world.current.map do |row|
+          processed_row = row.map { |cell| cell.live? ? "@" : "_"}.join(' ')
+        end.join("\n")
+        print world_string + eol(height, gen)
+      end
+
+      def eol(height, gen)
+        gen == @max_gen ? "\n" : format("\e[1A" * height + "\r")
+      end
+
+      def build_world(width, height)
         seed = []
         while yes? "Would you like to add a live cell to the grid? [Y/n]"
           x = ask "Please enter x coordinate"
           y = ask "Please enter y coordinate"
           seed << [(x.to_i) - 1, (y.to_i) -1]
         end
-
-        world = World.new options[:width], options[:height], seed
-
-        (1..options[:generations]).each do |gen|
-          draw(world)
-          sleep(1)
-          world.tick
-        end
-      end
-
-      def draw(world)
-        world_string = world.current.map do |row|
-          processed_row = row.map { |cell| cell.live? ? "@" : "_"}.join(' ')
-        end.join("\n")
-        eol = format("\e[1A" * @height + "\r")
-        print world_string + eol
+        World.new width, height, seed
       end
 
     end
