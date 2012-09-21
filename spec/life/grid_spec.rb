@@ -16,9 +16,9 @@ describe Grid do
   end
 
   describe "#to_s" do
-    let(:grid) { World.new(3,3, [[0,0], [1,2], [2,1]])}
+    let(:grid) { World.new(3,4, [[0,0], [1,2], [2,1]])}
     it "should output the correct string" do
-      grid.to_s("@", "_").should eq "@ _ _\n_ _ @\n_ @ _"
+      grid.to_s("@", "_").should eq "@ _ _\n_ _ @\n_ @ _\n_ _ _"
     end
   end
 
