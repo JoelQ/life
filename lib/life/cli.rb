@@ -17,7 +17,7 @@ module Life
       def new
         seed = build_seed(options[:seed])
         max_gen = options[:generations]
-        world = World.new(options[:height], options[:width], seed)
+        world = World.new(options[:width], options[:height], seed)
         display_simulation max_gen, options[:width], options[:height], world
       rescue Interrupt
         quit(options[:height])
@@ -31,7 +31,7 @@ module Life
       def random
         seed = build_random_seed options[:width], options[:height]
         max_gen = options[:generations]
-        world = World.new(options[:height], options[:width], seed)
+        world = World.new(options[:width], options[:height], seed)
         display_simulation max_gen, options[:width], options[:height], world
       rescue Interrupt
         quit(options[:height])
@@ -56,7 +56,7 @@ module Life
           seed = []
           seed_count = rand(1..(width*height/2))
           seed_count.times do
-            seed << [rand(height-1), rand(width-1)]
+            seed << [rand(width-1), rand(height-1)]
           end
           seed
         end
