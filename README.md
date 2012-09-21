@@ -21,10 +21,14 @@ This will create a 3x4 game that runs for 5 generations. The live cells in the s
 
 ## Pre-built configurations
 ### Random
-You can use a random initial pattern if you don't feel like building one yourself. Options are the same as for the new method except that no seed is passed.
+You can use a random initial pattern if you don't feel like building one yourself. Options are the same as for the new method except that no seed is passed. All of the options are optional. If you don't pass in a value it will default to a 30x30 grid for 100 generations.
 
 ```
 $ life random -w 10 -h 10 -g 5
+```
+or
+```
+$ life random
 ```
 
 ## Contributing
