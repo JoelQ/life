@@ -19,6 +19,8 @@ module Life
         max_gen = options[:generations]
         world = World.new(options[:height], options[:width], seed)
         display_simulation max_gen, options[:width], options[:height], world
+      rescue Interrupt
+        quit(options[:height])
       end
 
       desc :random, "Create new game with random starting pattern"
@@ -31,11 +33,19 @@ module Life
         max_gen = options[:generations]
         world = World.new(options[:height], options[:width], seed)
         display_simulation max_gen, options[:width], options[:height], world
+      rescue Interrupt
+        quit(options[:height])
       end
 
       no_tasks do
         def eol(height, curr_gen, max_gen)
           curr_gen == max_gen ? "\n" : format("\e[1A" * (height+3) + "\r")
+        end
+
+        def quit(height)
+          puts ("\n"*(height+3))
+          puts "Exiting..."
+          puts "Thanks for trying out Conway's game of life!"
         end
 
         def build_seed(pattern)
