@@ -24,7 +24,8 @@ class Grid < Array
   end
 
   def to_s(live, dead)
-    rows = map do |row|
+    array_of_rows = self.transpose
+    rows = array_of_rows.map do |row|
       row.map { |cell| cell.live? ? live : dead }.join(" ")
     end
     rows.join("\n")
